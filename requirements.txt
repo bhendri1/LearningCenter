@@ -2,3 +2,4 @@ pytest
 assertpy
 behave
 flask
+selenium
