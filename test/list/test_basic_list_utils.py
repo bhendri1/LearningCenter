@@ -39,7 +39,7 @@ def test_grocery_list_contains_apples_and_juice():
 
 def test_preferred_option_for_oranges_is_mandarin():
     with soft_assertions():
-        assert_that(preferred_option('oranges'), 'oranges').is_equal_to('dole')
+        assert_that(preferred_option('oranges'), 'oranges').is_equal_to('mandarin')
 
 def test_words_from_text():
     text1 = "The cat sat on the wall"

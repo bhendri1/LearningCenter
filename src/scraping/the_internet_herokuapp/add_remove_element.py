@@ -1,4 +1,3 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 from .base import HerokuAPPTestingBase
@@ -40,14 +39,16 @@ class AddRemoveElementPage(HerokuAPPTestingBase):
             Once on the 'Add/Remove Elements' excercise
             Remove the last element in the list of elements
         '''
-        raise NotImplementedError()
+        elementList = self.driver.find_elements(By.CSS_SELECTOR, 'button.added-manually')
+        elementList[-1].click()
 
     def popFrontElement(self):
         '''
             Once on the 'Add/Remove Elements' excercise
             Remove the first element in the list of elements
         '''
-        raise NotImplementedError()
+        elementList = self.driver.find_elements(By.CSS_SELECTOR, 'button.added-manually')
+        elementList[0].click()
 
     def popNthElement(self, n: int):
         '''
@@ -55,4 +56,5 @@ class AddRemoveElementPage(HerokuAPPTestingBase):
             Remove the nth element in the list of elements
             if there is no nth element raise an IndexError 
         '''
-        raise NotImplementedError()
+        elementList = self.driver.find_elements(By.CSS_SELECTOR, 'button.added-manually')
+        elementList[n].click()

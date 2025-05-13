@@ -102,7 +102,8 @@ def includes_value(list_1: list[any], search_val: any) -> bool:
     '''
         returns true if search_val is equal to one or more elements in the list
     '''
-    for i in range(len(list_1)):
+    num_elementsinList_1 = len(list_1)
+    for i in range(num_elementsinList_1): # 0, 1, 2, ... (num_elementsinList_1 - 1)
         if list_1[i] == search_val:
             return True
     return False

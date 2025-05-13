@@ -1,3 +1,4 @@
+import random
 import time
 from assertpy import assert_that, soft_assertions
 
@@ -43,14 +44,43 @@ def test_add_elements_loop():
         for i in range(1, 21):
             test_page.addElement()
             assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(i)
-        test_page.addElement()
         test_page.close()
 
 def test_pop_elements():
-    raise NotImplementedError()
+    test_page = AddRemoveElementPage()
+    test_page.loadPage()
+    assert_that(test_page.isPageLoaded()).is_true()
+    assert_that(test_page.countElements(), 'number of elements is empty on load').is_not_none()
+    for i in range(20):
+        test_page.addElement()
+    assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(20)
+    for i in range(20, 0, -1):
+        test_page.popElement()
+        assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(i-1)
+    test_page.close()
 
 def test_pop_front_elements():
-    raise NotImplementedError()
+    test_page = AddRemoveElementPage()
+    test_page.loadPage()
+    assert_that(test_page.isPageLoaded()).is_true()
+    assert_that(test_page.countElements(), 'number of elements is empty on load').is_not_none()
+    for i in range(20):
+        test_page.addElement()
+    assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(20)
+    for i in range(20, 0, -1):
+        test_page.popFrontElement()
+        assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(i-1)
+    test_page.close()
 
 def test_pop_nth_elements():
-    raise NotImplementedError()
+    test_page = AddRemoveElementPage()
+    test_page.loadPage()
+    assert_that(test_page.isPageLoaded()).is_true()
+    assert_that(test_page.countElements(), 'number of elements is empty on load').is_not_none()
+    for i in range(20):
+        test_page.addElement()
+    assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(20)
+    for i in range(20, 0, -1):
+        test_page.popNthElement(random.randint(0, i-1))
+        assert_that(test_page.countElements(), f'number of elements after {i} adds').is_equal_to(i-1)
+    test_page.close()
