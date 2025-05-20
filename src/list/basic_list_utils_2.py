@@ -1,3 +1,6 @@
+import math
+
+
 def reverse_order(list_1: list[any]) -> list[any]:
     result_list = []
     '''
@@ -30,6 +33,24 @@ def dot_product(num_list_1: list[int|float], num_list_2: list[int|float]) -> lis
     elif len_2 > len_1:
         for i in range(min_len, len_2):
             result_list.append(num_list_2[i])
+    
+    return result_list
+
+def dot_product_2(num_list_1: list[int|float], num_list_2: list[int|float]) -> list[int|float]:
+    '''
+        return the dot product of the two lists, will treat the shorter list as though the missing elements were all one.
+        the type of the returned value will be an integer if both are ints or a float if one or more values is a float
+        ie.
+            dot_product([1.0, 2.0, 3.0], [1, 2, 3, 4, 5]) = [1.0, 4.0, 9.0, 4, 5]
+    '''
+    result_list = []
+    len_1 = len(num_list_1)
+    len_2 = len(num_list_2)
+    max_len = math.max(len_1, len_2)
+    for i in range(max_len):
+        num_1 = num_list_1[i] if i < len_1 else 1
+        num_2 = num_list_2[i] if i < len_2 else 1
+        result_list.append(num_1 * num_2)
     
     return result_list
 
@@ -118,3 +139,56 @@ def num_occurances(list_1: list[any], search_value: any) -> int:
             count += 1
     return count
 
+def count_identical_neighbors(list_1: list[int]) -> int:
+    '''
+        count the number of possible pairs of elements in a list, that have the same value, 
+        and are next to each other in the list order.
+        
+        ex:
+            count_identical_neighbors([2, 3, 4, 2, 3, 4]) = 0
+            count_identical_neighbors([2, 3, 4, 4, 2, 3, 4]) = 1
+            count_identical_neighbors([2, 2, 2, 2, 2]) = 4
+    '''
+    count = 0
+
+    for i in range(len(list_1) - 1):
+        val_1 = list_1[i]
+        val_2 = list_1[i + 1]
+        if val_1 == val_2:
+            count += 1
+    
+    return count
+
+def count_identical_sets_of_neighbors(N: int, list_1: list[int]) -> int:
+    '''
+        count the number of possible subsets of size N of elements in a list, 
+        that have the same value, 
+        and are next to each other in the list order.
+        
+        Raise an error if N is less than 2, or greater than the length of the list
+        
+        ex:
+            count_identical_neighbors(2, [2, 3, 4, 2, 3, 4]) = 0
+            count_identical_neighbors(2, [2, 3, 4, 4, 2, 3, 4]) = 1
+            count_identical_neighbors(1, [2, 2, 2, 2, 2]) -> Errror
+            count_identical_neighbors(2, [2, 2, 2, 2, 2]) = 4
+            count_identical_neighbors(3, [2, 2, 2, 2, 2]) = 3
+            count_identical_neighbors(4, [2, 2, 2, 2, 2]) = 2
+            count_identical_neighbors(5, [2, 2, 2, 2, 2]) = 1
+            count_identical_neighbors(6, [2, 2, 2, 2, 2]) -> Error
+    '''
+    count = 0
+        
+    #assert N >= 2, f"N must be greater than or equal to 2 ({N} < 2)"
+    #assert  N <= len(list_1), f"N cannot be greater than list length {len(list_1)} ({N} > {len(list_1)})"
+
+    for i in range(len(list_1) - N + 1):
+        identical = True
+        for j in range(1, N): # Why N minus 1?
+            if list_1[i] != list_1[i + j]:
+                identical = False
+                break
+        if identical:
+            count += 1
+    
+    return count

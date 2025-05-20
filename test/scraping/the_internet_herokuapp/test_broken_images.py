@@ -1,4 +1,3 @@
-import time
 from assertpy import assert_that, soft_assertions
 
 from src.scraping.the_internet_herokuapp.broken_images import DetectBrokenImages
