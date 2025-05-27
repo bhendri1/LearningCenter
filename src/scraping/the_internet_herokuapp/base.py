@@ -14,6 +14,7 @@ class HerokuAPPTestingBase:
         return self.driver.current_url == 'https://the-internet.herokuapp.com/'
 
     def close(self):
+        print('closing')
         self.driver.close()
 
     @property
